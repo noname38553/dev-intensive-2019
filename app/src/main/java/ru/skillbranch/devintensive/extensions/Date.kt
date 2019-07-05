@@ -45,9 +45,9 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         }
     } else {
         when (time) {
-            in 0..1 -> time3 = "сейчас"
+            in 0..1 -> time3 = "только что"
             in 1..45 -> time3 = "через несколько секунд"
-            in 45..75 -> time3 = "через минуту "
+            in 45..75 -> time3 = "через минуту"
             in 75..(60 * 45) -> time3 = "через ${Utils.declination(time / 60, "MINUTE")}"
             in (60 * 45)..(60 * 75) -> time3 = "через час"
             in (60 * 75)..(60 * 60 * 22) -> time3 = "через ${Utils.declination(time / 3600, "HOUR")}"
@@ -61,10 +61,14 @@ fun Date.humanizeDiff(date: Date = Date()): String {
 
 }
 
-
 enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
-    DAY
+    DAY;
+
+    fun plural(value: Int): String {
+        return Utils.declination(value.toLong(), this.toString())
+    }
+
 }
