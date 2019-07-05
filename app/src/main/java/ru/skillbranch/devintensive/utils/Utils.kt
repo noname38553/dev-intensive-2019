@@ -145,7 +145,7 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
                     when (NN) {
                         2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N секунды"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N секунду"
@@ -162,7 +162,7 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
                     when (NN) {
                         2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N минуты"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N минуту"
@@ -179,7 +179,7 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
                     when (NN) {
                         2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N часа"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N час"
@@ -196,10 +196,9 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
                     when (NN) {
-                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
-                            "$N дня"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N дня"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N день"
                         else -> my_text = "$N дней"
                     }
