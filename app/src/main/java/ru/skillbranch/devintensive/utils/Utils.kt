@@ -147,8 +147,8 @@ object Utils {
                     var NN = N
                     if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
                     when (NN) {
-                        22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N секунды"
-                        21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N секунду"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N секунды"
+                        1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N секунду"
                         else -> my_text = "$N секунд"
                     }
                 }
@@ -164,8 +164,8 @@ object Utils {
                     var NN = N
                     if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
                     when (NN) {
-                        22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N минуты"
-                        21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N минуту"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N минуты"
+                        1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N минуту"
                         else -> my_text = "$N минут"
                     }
                 }
@@ -181,8 +181,8 @@ object Utils {
                     var NN = N
                     if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
                     when (NN) {
-                        22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N часа"
-                        21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N час"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N часа"
+                        1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N час"
                         else -> my_text = "$N часов"
                     }
                 }
@@ -198,9 +198,9 @@ object Utils {
                     var NN = N
                     if (N.toString().length == 3) NN = N.toString().substring(1, 3).toLong()
                     when (NN) {
-                        22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
                             "$N дня"
-                        21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N день"
+                        1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N день"
                         else -> my_text = "$N дней"
                     }
                 }
