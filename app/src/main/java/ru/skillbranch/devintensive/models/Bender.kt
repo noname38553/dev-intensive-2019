@@ -13,20 +13,24 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
+        if (answer.length == 0) {
+            status = status.nextStatus()
+            "Это неправильный ответ\n${question.question}" to status.color
+        }
         when (question) {
-            Question.NAME -> if (!answer.isNotEmpty() && !answer[0].isUpperCase()) {
+            Question.NAME -> if (!answer[0].isUpperCase()) {
                 return "Имя должно начинаться с заглавной буквы\n${question.question}" to status.color
             }
-            Question.PROFESSION -> if (!answer.isNotEmpty() && answer[0].isUpperCase()) {
+            Question.PROFESSION -> if (answer[0].isUpperCase()) {
                 return "Профессия должна начинаться со строчной буквы\n${question.question}" to status.color
             }
-            Question.MATERIAL -> if (!answer.isNotEmpty() && answer.contains(Regex("\\d+"))) {
+            Question.MATERIAL -> if (answer.contains(Regex("\\d+"))) {
                 return "Материал не должен содержать цифр\n${question.question}" to status.color
             }
-            Question.BDAY -> if (!answer.isNotEmpty() && answer.contains(Regex("\\D+"))) {
+            Question.BDAY -> if (answer.contains(Regex("\\D+"))) {
                 return "Год моего рождения должен содержать только цифры\n${question.question}" to status.color
             }
-            Question.SERIAL -> if (!answer.isNotEmpty() && (answer.contains(Regex("\\D+")) || answer.length != 7)) {
+            Question.SERIAL -> if (answer.contains(Regex("\\D+")) || answer.length != 7) {
                 return "Серийный номер содержит только цифры, и их 7\n${question.question}" to status.color
             }
             else -> ""
@@ -36,7 +40,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             question = Question.NAME
             "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
         } else {
-            return if (question.answers.contains(answer)) {
+            if (question.answers.contains(answer)) {
                 question = question.nextQuestion()
                 "Отлично - ты справился\n${question.question}" to status.color
             } else {
