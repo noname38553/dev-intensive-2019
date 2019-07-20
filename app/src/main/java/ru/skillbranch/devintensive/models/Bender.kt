@@ -15,7 +15,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
         if (answer.length == 0) {
             status = status.nextStatus()
-            "Это неправильный ответ\n${question.question}" to status.color
+            return "Это неправильный ответ\n${question.question}" to status.color
         }
         when (question) {
             Question.NAME -> if (!answer[0].isUpperCase()) {
