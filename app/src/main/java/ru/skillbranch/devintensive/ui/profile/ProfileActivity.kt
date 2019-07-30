@@ -122,7 +122,6 @@ class ProfileActivity : AppCompatActivity() {
 
             background.colorFilter = filter
             setImageDrawable(icon)
-
         }
 
     }
