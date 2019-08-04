@@ -173,7 +173,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun updateRepoError(isError: Boolean) {
         wr_repository.isErrorEnabled = isError
         wr_repository.error = if (isError) "Невалидный адрес репозитория" else ""
-        scroll.scrollBy(0, 200)
+        //scroll.scrollBy(0, 200)
     }
 
 }
