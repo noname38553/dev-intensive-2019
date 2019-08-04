@@ -36,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
     lateinit var viewFields: Map<String, TextView>
-    lateinit var avatarIV : ImageView
+    lateinit var avatarIV: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -73,7 +73,10 @@ class ProfileActivity : AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
-        updateAvatar(profile)
+      //  if (((profile.firstName == "") or (profile.firstName == null)) and ((profile.lastName == "") or (profile.lastName == null))) {
+      //  } else {
+            updateAvatar(profile)
+      //  }
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
@@ -154,7 +157,8 @@ class ProfileActivity : AppCompatActivity() {
             repository = et_repository.text.toString()
         ).apply {
             viewModel.saveProfileData(this)
-            //updateAvatar(this)
+            updateAvatar(this)
+
         }
 
 
@@ -169,8 +173,11 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun updateAvatar(profile: Profile) {
         val initials = toInitials(profile.firstName, profile.lastName)
-        iv_avatar.generateAvatar(initials, convertSpToPx(this, 48), theme)
-
+        if (((profile.firstName == "") or (profile.firstName == null)) and ((profile.lastName == "") or (profile.lastName == null))) {
+            //iv_avatar.generateAvatar("", convertSpToPx(this, 0), theme)
+        } else {
+            iv_avatar.generateAvatar(initials, convertSpToPx(this, 48), theme)
+        }
     }
 
     private fun updateRepository(isError: Boolean) {
