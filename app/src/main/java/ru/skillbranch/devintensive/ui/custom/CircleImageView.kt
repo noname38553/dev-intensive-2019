@@ -13,53 +13,20 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.utils.Utils
 import kotlin.math.min
 
-class CircleImageView @JvmOverloads constructor (
+class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-): ImageView(context, attrs, defStyleAttr) {
+) : ImageView(context, attrs, defStyleAttr) {
     companion object {
         private const val DEFAULT_BORDER_COLOR: Int = Color.WHITE
     }
-    /*
-        var cvborderColor = Color.WHITE
-        var cvborderWidth = convertDpToPx(context, 2)
 
-        init {
-
-            val attributes = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0)
-
-            val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
-
-            val BorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_civ_border_width, cvborderWidth)
-            val BorderColor = a.getColor(R.styleable.CircleImageView_civ_border_color, cvborderColor)
-    //        val BorderOverlay = a.getBoolean(R.styleable.CircleImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY)
-    //        val mCircleBackgroundColor =
-    //            a.getColor(R.styleable.CircleImageView_civ_circle_background_color, DEFAULT_CIRCLE_BACKGROUND_COLOR)
-
-            a.recycle()
-        }
-        fun getBorderWidth():Int = cvborderWidth
-
-        fun setBorderWidth(@Dimension dp:Int){
-            cvborderWidth = convertDpToPx(context, dp)
-            this.invalidate()
-        }
-
-        fun getBorderColor():Int = cvborderColor
-
-        fun setBorderColor(hex:String){
-
-        }
-
-        fun setBorderColor(@ColorRes colorId: Int){
-
-        }
-    */
     private var borderColor = DEFAULT_BORDER_COLOR
-    private var borderWidth = convertDpToPx(context, 2)
+    private var borderWidth = Utils.convertDpToPx(context, 2)
     private var text: String? = null
     private var bitmap: Bitmap? = null
 
@@ -72,10 +39,10 @@ class CircleImageView @JvmOverloads constructor (
         }
     }
 
-    fun getBorderWidth(): Int = convertPxToDp(context, borderWidth)
+    fun getBorderWidth(): Int = Utils.convertPxToDp(context, borderWidth)
 
     fun setBorderWidth(dp: Int) {
-        borderWidth = convertDpToPx(context, dp)
+        borderWidth = Utils.convertDpToPx(context, dp)
         this.invalidate()
     }
 
@@ -110,19 +77,19 @@ class CircleImageView @JvmOverloads constructor (
         if (bitmap == null || text != this.text){
             val image =
                 if (text == null) {
-                    getDefaultAvatar(theme)
+                    generateDefAvatar(theme)
                 }
-                else getInitials(text, sizeSp, theme)
+                else generateLetterAvatar(text, sizeSp, theme)
 
             this.text = text
             bitmap = image
-            setImageBitmap(bitmap)
+            //setImageBitmap(bitmap)
             invalidate()
         }
     }
 
-    private fun getInitials(text: String, sizeSp: Int, theme: Resources.Theme): Bitmap {
-        val image = getDefaultAvatar(theme)
+    private fun generateLetterAvatar(text: String, sizeSp: Int, theme: Resources.Theme): Bitmap {
+        val image = generateDefAvatar(theme)
 
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.textSize = sizeSp.toFloat()
@@ -142,10 +109,11 @@ class CircleImageView @JvmOverloads constructor (
         return image
     }
 
-    private fun getDefaultAvatar(theme: Resources.Theme): Bitmap {
-        val image = Bitmap.createBitmap(layoutParams.height, layoutParams.height, Bitmap.Config.ARGB_8888)
+    private fun generateDefAvatar(theme: Resources.Theme): Bitmap {
+        val image = Bitmap.createBitmap(layoutParams.height, layoutParams.height, Config.ARGB_8888)
         val color = TypedValue()
         theme.resolveAttribute(R.attr.colorAccent, color, true)
+
 
         val canvas = Canvas(image)
         canvas.drawColor(color.data)
@@ -223,26 +191,5 @@ class CircleImageView @JvmOverloads constructor (
 
         return outputBmp
     }
-
-
-
-
-
-    fun convertDpToPx(context: Context, dp: Int): Int {
-        val scale = context.resources.displayMetrics.density
-        return (dp * scale + 0.5f).toInt()
-    }
-
-
-    fun convertPxToDp(context: Context, px: Int): Int {
-        val scale = context.resources.displayMetrics.density
-        return (px / scale + 0.5f).toInt()
-    }
-
-
-    fun convertSpToPx(context: Context, sp: Int): Int {
-        return sp * context.resources.displayMetrics.scaledDensity.toInt()
-    }
-
 }
 

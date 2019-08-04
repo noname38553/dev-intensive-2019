@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -22,6 +23,8 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils.convertSpToPx
+import ru.skillbranch.devintensive.utils.Utils.toInitials
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 class ProfileActivity : AppCompatActivity() {
@@ -32,6 +35,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
     lateinit var viewFields: Map<String, TextView>
+    lateinit var avatarIV : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -68,7 +72,7 @@ class ProfileActivity : AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
-//updateAvatar(profile)
+        updateAvatar(profile)
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
@@ -82,6 +86,7 @@ class ProfileActivity : AppCompatActivity() {
             "rating" to tv_rating,
             "respect" to tv_respect
         )
+        avatarIV = iv_avatar
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
 
@@ -148,12 +153,13 @@ class ProfileActivity : AppCompatActivity() {
             repository = et_repository.text.toString()
         ).apply {
             viewModel.saveProfileData(this)
+            updateAvatar(this)
         }
 
 
     }
 
-    /*
+
     private fun getThemeAccentColor(): Int {
         val value = TypedValue()
         theme.resolveAttribute(R.attr.colorAccent, value, true)
@@ -161,11 +167,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateAvatar(profile: Profile) {
-        val initials = Utils.toInitials(profile.firstName, profile.lastName)
-        iv_avatar.generateAvatar(initials, Utils.convertSpToPx(this, 48), theme)
+        val initials = toInitials(profile.firstName, profile.lastName)
+        iv_avatar.generateAvatar(initials, convertSpToPx(this, 48), theme)
 
     }
-*/
+
     private fun updateRepository(isError: Boolean) {
         if (isError) et_repository.text.clear()
     }

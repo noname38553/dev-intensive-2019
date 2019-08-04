@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
+
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         if ((fullName == null) or (fullName?.trim() == "")) {
@@ -236,4 +238,22 @@ object Utils {
                             "\\/join)\$", RegexOption.IGNORE_CASE
                 )
             )
+
+
+
+    fun convertDpToPx(context: Context, dp: Int): Int {
+        val scale = context.resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
+    }
+
+
+    fun convertPxToDp(context: Context, px: Int): Int {
+        val scale = context.resources.displayMetrics.density
+        return (px / scale + 0.5f).toInt()
+    }
+
+
+    fun convertSpToPx(context: Context, sp: Int): Int {
+        return sp * context.resources.displayMetrics.scaledDensity.toInt()
+    }
 }
