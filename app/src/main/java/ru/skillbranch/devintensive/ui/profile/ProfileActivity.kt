@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -171,7 +172,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun updateRepoError(isError: Boolean) {
         wr_repository.isErrorEnabled = isError
-        wr_repository.error = if (isError) "Неправильный адрес репозитория" else ""
+        wr_repository.error = if (isError) "Невалидный адрес репозитория" else ""
+        scroll.scrollBy(0, 200)
     }
 
 }

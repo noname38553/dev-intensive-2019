@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 <LinearLayout
 
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -71,7 +75,7 @@
         </RelativeLayout>
 
     </FrameLayout>
-    <LinearLayout android:layout_width="match_parent"
+        <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:background="?attr/colorAccentedSurface">
@@ -209,7 +213,7 @@
           android:layout_marginLeft="@dimen/space_maximum_72"
           android:background="?attr/colorDivider"/>
 
-    <LinearLayout
+        <LinearLayout
             style="@style/Profile.InfoItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -245,3 +249,4 @@
         />
     </LinearLayout>
 </LinearLayout>
+        </ScrollView>
