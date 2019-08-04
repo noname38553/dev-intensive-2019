@@ -23,6 +23,7 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.utils.Utils.convertSpToPx
 import ru.skillbranch.devintensive.utils.Utils.toInitials
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
@@ -86,7 +87,7 @@ class ProfileActivity : AppCompatActivity() {
             "rating" to tv_rating,
             "respect" to tv_respect
         )
-        avatarIV = iv_avatar
+        //avatarIV = iv_avatar
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
 
@@ -153,7 +154,7 @@ class ProfileActivity : AppCompatActivity() {
             repository = et_repository.text.toString()
         ).apply {
             viewModel.saveProfileData(this)
-            updateAvatar(this)
+            //updateAvatar(this)
         }
 
 

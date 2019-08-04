@@ -16,6 +16,7 @@ object Utils {
         }
     }
 
+
     fun transliteration(payload: String, divider: String = " "): String {
         payload.trim()
         var text: String = ""
@@ -92,6 +93,7 @@ object Utils {
         if ("$f$l" == "") return null else return "$f$l"
 
     }
+
 
     /*
     fun declination(N: Long, period: String): String {
