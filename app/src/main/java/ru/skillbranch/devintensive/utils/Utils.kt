@@ -2,7 +2,7 @@ package ru.skillbranch.devintensive.utils
 
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
-        if((fullName == null) or (fullName?.trim() == "")){
+        if ((fullName == null) or (fullName?.trim() == "")) {
             return Pair(null, null)
         } else {
             val parts: List<String>? = fullName?.trim()?.split(" ")
@@ -86,8 +86,8 @@ object Utils {
         var f: String? = ""
         var l: String? = ""
         if ((firstName != null) and (firstName?.trim() != "")) f = firstName?.trim()?.substring(0, 1)?.toUpperCase()
-        if ((lastName != null) and  (lastName?.trim() != "")) l = lastName?.trim()?.substring(0, 1)?.toUpperCase()
-        if("$f$l" == "") return null else return "$f$l"
+        if ((lastName != null) and (lastName?.trim() != "")) l = lastName?.trim()?.substring(0, 1)?.toUpperCase()
+        if ("$f$l" == "") return null else return "$f$l"
 
     }
 
@@ -145,9 +145,10 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length - 2).toLong()
                     when (NN) {
-                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N секунды"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
+                            "$N секунды"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N секунду"
                         else -> my_text = "$N секунд"
                     }
@@ -162,9 +163,10 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length - 2).toLong()
                     when (NN) {
-                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N минуты"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
+                            "$N минуты"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N минуту"
                         else -> my_text = "$N минут"
                     }
@@ -179,9 +181,10 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length - 2).toLong()
                     when (NN) {
-                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N часа"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
+                            "$N часа"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N час"
                         else -> my_text = "$N часов"
                     }
@@ -196,9 +199,10 @@ object Utils {
                     }
                 } else {
                     var NN = N
-                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length-2).toLong()
+                    if (N.toString().length > 2) NN = N.toString().substring(N.toString().length - 2).toLong()
                     when (NN) {
-                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text = "$N дня"
+                        2L, 3L, 4L, 22L, 23L, 24L, 32L, 33L, 34L, 42L, 43L, 44L, 52L, 53L, 54L, 62L, 63L, 64L, 72L, 73L, 74L, 82L, 83L, 84L, 92L, 93L, 94L -> my_text =
+                            "$N дня"
                         1L, 21L, 31L, 41L, 51L, 61L, 71L, 81L, 91L -> my_text = "$N день"
                         else -> my_text = "$N дней"
                     }
@@ -208,22 +212,28 @@ object Utils {
         return my_text
     }
 
-   /* fun isValidateRepository(repo: String): Boolean = repo.isEmpty() || repo.matches(
-        Regex("^(https://){0,1}(www.){0,1}github.com\\/[A-z\\d](?:[A-z\\d]|(_|-)(?=[A-z\\d])){0,256}(/)?\$",RegexOption.IGNORE_CASE)) &&
-            !repo.matches(Regex("^.*(" +
-                    "\\/enterprise|" +
-                    "\\/features|" +
-                    "\\/topics|" +
-                    "\\/collections|" +
-                    "\\/trending|" +
-                    "\\/events|" +
-                    "\\/marketplace" +
-                    "|\\/pricing|" +
-                    "\\/nonprofit|" +
-                    "\\/customer-stories|" +
-                    "\\/security|" +
-                    "\\/login|" +
-                    "\\/join)\$",RegexOption.IGNORE_CASE)
+    fun isValidateRepository(repo: String): Boolean = repo.isEmpty() || repo.matches(
+        Regex(
+            "^(https://){0,1}(www.){0,1}github.com\\/[A-z\\d](?:[A-z\\d]|(_|-)(?=[A-z\\d])){0,256}(/)?\$",
+            RegexOption.IGNORE_CASE
+        )
+    ) &&
+            !repo.matches(
+                Regex(
+                    "^.*(" +
+                            "\\/enterprise|" +
+                            "\\/features|" +
+                            "\\/topics|" +
+                            "\\/collections|" +
+                            "\\/trending|" +
+                            "\\/events|" +
+                            "\\/marketplace" +
+                            "|\\/pricing|" +
+                            "\\/nonprofit|" +
+                            "\\/customer-stories|" +
+                            "\\/security|" +
+                            "\\/login|" +
+                            "\\/join)\$", RegexOption.IGNORE_CASE
+                )
             )
-            */
 }
