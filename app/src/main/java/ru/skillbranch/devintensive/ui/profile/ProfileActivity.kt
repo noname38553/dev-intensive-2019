@@ -1,12 +1,12 @@
 package ru.skillbranch.devintensive.ui.profile
 
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextPaint
 import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -32,11 +33,11 @@ class ProfileActivity : AppCompatActivity() {
     companion object {
         const val IS_EDIT_MODE = "IS_EDIT_MODE"
     }
-
+    private var currentInitials:String? = null
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
     lateinit var viewFields: Map<String, TextView>
-    lateinit var avatarIV: ImageView
+    //lateinit var avatarIV: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -76,9 +77,40 @@ class ProfileActivity : AppCompatActivity() {
       //  if (((profile.firstName == "") or (profile.firstName == null)) and ((profile.lastName == "") or (profile.lastName == null))) {
       //  } else {
             updateAvatar(profile)
+        //val initials = Utils.toInitials(profile.firstName, profile.lastName)
+      //  updateAvatar1(initials)
+
       //  }
     }
+   // private fun updateAvatar1(initials: String?) {
+  //      if(initials != currentInitials) {
+  //          currentInitials = initials
+  //          iv_avatar.setImageDrawable(generateNewAvatar())
+   //     }
+  //  }
 
+    private fun generateNewAvatar(): Drawable? {
+        if(currentInitials.isNullOrEmpty()) return null
+
+        val width = 400
+        val height = 400
+
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap!!)
+
+        val color = TypedValue()
+        theme.resolveAttribute(R.attr.colorAccent, color, true)
+        canvas.drawColor(color.data)
+
+        val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        textPaint.textSize = 50F * resources.displayMetrics.scaledDensity
+        textPaint.color = Color.WHITE
+        val textWidth = textPaint.measureText(currentInitials) * 0.5F
+        val textBaseLineHeight = textPaint.fontMetrics.ascent * -0.35F
+        canvas.drawText(currentInitials!!, width/2 - textWidth, height/2 + textBaseLineHeight, textPaint)
+
+        return bitmap.toDrawable(resources)
+    }
     private fun initViews(savedInstanceState: Bundle?) {
         viewFields = mapOf(
             "nickName" to tv_nick_name,
@@ -157,13 +189,9 @@ class ProfileActivity : AppCompatActivity() {
             repository = et_repository.text.toString()
         ).apply {
             viewModel.saveProfileData(this)
-            updateAvatar(this)
-
+           // updateAvatar(this)
         }
-
-
     }
-
 
     private fun getThemeAccentColor(): Int {
         val value = TypedValue()
@@ -172,12 +200,17 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateAvatar(profile: Profile) {
-        val initials = toInitials(profile.firstName, profile.lastName)
-        if (((profile.firstName == "") or (profile.firstName == null)) and ((profile.lastName == "") or (profile.lastName == null))) {
-            //iv_avatar.generateAvatar("", convertSpToPx(this, 0), theme)
-        } else {
-            iv_avatar.generateAvatar(initials, convertSpToPx(this, 48), theme)
-        }
+       // val initials = toInitials(profile.firstName, profile.lastName)
+      //  if (((profile.firstName == "") or (profile.firstName == null)) and ((profile.lastName == "") or (profile.lastName == null))) {
+      //      //iv_avatar.generateAvatar(null, convertSpToPx(this, 0), theme)
+     //       iv_avatar.generateAvatar("", "", convertSpToPx(this, 48),theme)
+       //     //iv_avatar.setImageDrawable(resources.getDrawable(R.drawable.avatar_default, theme))
+         //       //resources.getDrawable(R.drawable.avatar_default, theme)
+
+        //} else {
+            //iv_avatar.generateAvatar(initials, convertSpToPx(this, 48), theme)
+            iv_avatar.generateAvatar(profile.firstName, profile.lastName, convertSpToPx(this, 48),theme)
+        //}
     }
 
     private fun updateRepository(isError: Boolean) {

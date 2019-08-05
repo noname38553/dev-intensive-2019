@@ -7,14 +7,17 @@ import android.graphics.Bitmap.Config
 import android.graphics.PorterDuff.Mode
 import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.utils.Utils.convertDpToPx
 import ru.skillbranch.devintensive.utils.Utils.convertPxToDp
+import ru.skillbranch.devintensive.utils.Utils.convertSpToPx
 import kotlin.math.min
 
 class CircleImageView @JvmOverloads constructor (
@@ -107,9 +110,9 @@ class CircleImageView @JvmOverloads constructor (
         canvas.drawBitmap(bitmap, 0F, 0F, null)
     }
 
-    fun generateAvatar(text: String?, sizeSp: Int, theme: Resources.Theme){
+ //   fun generateAvatar(text: String?, sizeSp: Int, theme: Resources.Theme){
         /* don't render if initials haven't changed */
-        if (bitmap == null || text != this.text){
+        /*if (bitmap == null || text != this.text){
             val image =
                 if (text == null) {
                     getDefaultAvatar(theme)
@@ -120,7 +123,39 @@ class CircleImageView @JvmOverloads constructor (
             bitmap = image
             //setImageBitmap(bitmap)
             invalidate()
+        }*/
+
+    fun generateAvatar(firstName: String, lastName: String, sizeSp: Int, theme: Resources.Theme) {
+        val initials = Utils.toInitials(firstName, lastName)
+        Log.d("M_CircleImageView","$firstName , $lastName , $sizeSp , $theme , $initials")
+        //if (firstName.isEmpty() && lastName.isEmpty()) {
+        val image = if (((firstName == "") or (firstName == null)) and ((lastName == "") or (lastName == null))) {
+            //setImageDrawable(resources.getDrawable(R.drawable.avatar_default, context.theme))
+            //getInitials("", 0, theme)
+            getDefaultAvatar(theme)
+          //  Log.d("M_CircleImageView","Yes")
+        } else {
+            getInitials(initials.toString(), sizeSp, theme)
+            //setImageDrawable(resources.getDrawable(R.drawable.avatar_default, context.theme))
+         //   Log.d("M_CircleImageView","No")
         }
+        this.text = text
+        bitmap = image
+        setImageBitmap(bitmap)
+        invalidate()
+    }
+
+    private fun getDefaultAvatar(theme: Resources.Theme): Bitmap {
+        val image = Bitmap.createBitmap(layoutParams.height, layoutParams.height, Bitmap.Config.ARGB_8888)
+        //val image = Bitmap.createBitmap(layoutParams.height, layoutParams.height, R.drawable.avatar_default)
+        //val color = TypedValue()
+        //theme.resolveAttribute(R.attr.colorAccent, color, true)
+
+        val canvas = Canvas(image)
+
+        //canvas.drawColor(color.data)
+        //canvas.drawARGB(0,0,0,0)
+        return image
     }
 
     private fun getInitials(text: String, sizeSp: Int, theme: Resources.Theme): Bitmap {
@@ -139,21 +174,16 @@ class CircleImageView @JvmOverloads constructor (
 
         val textBottom = backgroundBounds.centerY() - textBounds.exactCenterY()
         val canvas = Canvas(image)
-        canvas.drawText(text, backgroundBounds.centerX(), textBottom, paint)
-
-        return image
-    }
-
-    private fun getDefaultAvatar(theme: Resources.Theme): Bitmap {
-        val image = Bitmap.createBitmap(layoutParams.height, layoutParams.height, Bitmap.Config.ARGB_8888)
         val color = TypedValue()
         theme.resolveAttribute(R.attr.colorAccent, color, true)
-
-        val canvas = Canvas(image)
         canvas.drawColor(color.data)
+
+        canvas.drawText(text, backgroundBounds.centerX(), textBottom, paint)
+
 
         return image
     }
+
 
     private fun getStrokedBitmap(squareBmp: Bitmap, strokeWidth: Int, color: Int): Bitmap {
         val inCircle = RectF()
